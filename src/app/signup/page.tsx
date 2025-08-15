@@ -1,56 +1,58 @@
-import styles from "./page.module.scss";
-import logoIMG from "../../public/logo.svg";
+import styles from "../page.module.scss";
 import Image from "next/image";
+import logoIMG from "../../../public/logo.svg";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import { api } from "@/services/api";
 
-export default function Page() {
-  async function handleLogin(formData: FormData) {
+export default function Signup() {
+
+  async function handleRegister(formData: FormData) {
     "use server";
 
+    const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (email === "" || password === "") {
+    console.log(name, email, password);
+
+    if (name === "" || email === "" || password === "") {
+      console.log("Preencha todos os campos!");
       return;
     }
 
     try {
-      const response = await api.post("/session", {
+      await api.post("/users", {
+        name,
         email,
         password,
       });
-
-      if (!response.data.token) {
-        return;
-      }
-
-      //console.log(response.data);
-      const cookiesStore = await cookies();
-      const expressTime = 60 * 60 * 24 * 30 * 1000;
-      cookiesStore.set("session", response.data.token, {
-        maxAge: expressTime,
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        httpOnly: false,
-      });
+      console.log("usuário cadastrado com sucesso!");
+      
     } catch (err) {
-      console.log("Deu error");
+      console.log("error fela");
       console.log(err);
-      return;
     }
 
-    redirect("/dashboard");
+    redirect('/')
   }
+
   return (
     <>
       <div className={styles.containerCenter}>
         <Image alt="Logo da pizzaria" src={logoIMG} />
 
         <section className={styles.login}>
-          <form action={handleLogin}>
+          <h1>Crie sua conta</h1>
+          <form action={handleRegister}>
+            <input
+              type="text"
+              required
+              name="name"
+              placeholder="Digite seu nome..."
+              className={styles.input}
+            />
+
             <input
               type="email"
               required
@@ -67,12 +69,12 @@ export default function Page() {
               className={styles.input}
             />
 
-            <button>Acessar</button>
+            <button>Cadastrar</button>
           </form>
 
           <span className={styles.cadastro}>
-            Não possui conta?
-            <Link href={"/signup"}>Criar conta</Link>
+            Já possui conta?
+            <Link href={"/"}>Entrar com sua conta</Link>
           </span>
         </section>
       </div>
