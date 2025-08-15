@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🍕 Pizzaria - Sistema de gerenciamento de pedidos
 
-## Getting Started
+Um sistema web para gerenciamento de pedidos de uma pizzaria, permitindo cadastro de produtos, categorias, autenticação de usuários e visualização em tempo real dos pedidos.
 
-First, run the development server:
+🚀 Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+React.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sonner (notificações)
 
-## Learn More
+API própria desenvolvida para integração com o frontend
 
-To learn more about Next.js, take a look at the following resources:
+📌 Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cadastro de Produtos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Nome, preço, categoria e descrição.
 
-## Deploy on Vercel
+Cadastro de Categorias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Criação e listagem de categorias para organização dos produtos.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Autenticação de Usuário
+
+Criar conta e acessar a conta.
+
+Página Principal
+
+Lista todos os pedidos pendentes.
+
+Detalhes do Pedido
+
+Ao clicar em um pedido, abre um modal exibindo:
+
+Itens do pedido
+
+Valor total
+
+Botão para concluir o pedido.
+
+
+🔗 API
+
+Este projeto depende de uma API backend própria.
+O código e as instruções para rodar a API estão disponíveis em:
+https://github.com/PedroLuizPG/Api-Pizzaria
+Integração com API
+
+Todo o fluxo de dados é feito via API própria.
