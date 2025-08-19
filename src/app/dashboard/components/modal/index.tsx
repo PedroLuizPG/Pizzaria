@@ -3,13 +3,14 @@ import styles from "./styles.module.scss";
 import { use } from "react";
 import { OrderContext } from "@/providers/order";
 import { calculateOrder } from "@/lib/helper";
+import Image from "next/image";
 
 export function ModalOrder() {
-  const { onRequestClose, order,finishOrder } = use(OrderContext);
+  const { onRequestClose, order, finishOrder } = use(OrderContext);
 
-  async function handleFinishOrder(order_id:string){
-   await finishOrder(order_id)
-    onRequestClose()
+  async function handleFinishOrder(order_id: string) {
+    await finishOrder(order_id);
+    onRequestClose();
   }
   return (
     <dialog className={styles.dialogContainer}>
@@ -33,8 +34,10 @@ export function ModalOrder() {
 
           {order.map((item) => (
             <section className={styles.item} key={item.id}>
+              <Image src={item.product.banner} alt="#" width={120} height={120} />
               <span>
-              Qtd {item.amount} - <b>{item.product.name}</b> - R$ {parseFloat(item.product.price) * item.amount}
+                Qtd {item.amount} - <b>{item.product.name}</b> - R${" "}
+                {parseFloat(item.product.price) * item.amount}
               </span>
               <span className={styles.description}>
                 {item.product.description}
@@ -42,9 +45,16 @@ export function ModalOrder() {
             </section>
           ))}
 
-          <h3 className={styles.total}>Total da conta: R$ {calculateOrder(order)}</h3>
+          <h3 className={styles.total}>
+            Total da conta: R$ {calculateOrder(order)}
+          </h3>
 
-          <button className={styles.buttonOrder} onClick={() => handleFinishOrder(order[0].order_id)}>Concluir pedido</button>
+          <button
+            className={styles.buttonOrder}
+            onClick={() => handleFinishOrder(order[0].order_id)}
+          >
+            Concluir pedido
+          </button>
         </article>
       </section>
     </dialog>
