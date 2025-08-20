@@ -1,21 +1,25 @@
-
+"use client";
 
 import styles from "./styles.module.scss";
 import { Button } from "@/app/dashboard/components/button";
 import { toast } from "sonner";
 
 import { api } from "@/services/api";
-import { getCookieServer } from "@/lib/cookieServer";
+import { getCookieClient } from "@/lib/cookieClient";
 
 export default function Category() {
-  async function handleRegisterCategory(formData: FormData) {
-    
+  async function handleRegisterCategory(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
     const name = formData.get("name");
 
     if (name === "") return;
 
     const data = { name: name };
-    const token = await getCookieServer();
+    const token = await getCookieClient();
 
     try {
       await api.post("/category", data, {
@@ -36,7 +40,7 @@ export default function Category() {
     <main className={styles.container}>
       <h1>Nova categoria</h1>
 
-      <form action={handleRegisterCategory} className={styles.form}>
+      <form onSubmit={handleRegisterCategory} className={styles.form}>
         <input
           type="text"
           name="name"
