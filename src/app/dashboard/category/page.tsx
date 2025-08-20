@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import styles from "./styles.module.scss";
 import { Button } from "@/app/dashboard/components/button";
 import { toast } from "sonner";
