@@ -7,26 +7,27 @@ import { getCookieServer } from "@/lib/cookieServer";
 
 export default function Category() {
   async function handleRegisterCategory(formData: FormData) {
-    "use client";
+    "use server";
     const name = formData.get("name");
 
     if (name === "") return;
 
     const data = { name: name };
-    const token = await getCookieServer();
+    const token = await getCookieServer()
 
-    try {
-      await api.post("/category", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("Categoria cadastrada com sucesso!");
-      toast.success("Categoria cadastrada com sucesso!");
-    } catch (err) {
-      console.log("ERROR " + err);
-      toast.error("Erro ao cadastrar categoria!");
-      return;
+    try{
+      await api.post('/category', data,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      } )
+      console.log("Categoria cadastrada com sucesso!")
+      toast.success("Categoria cadastrada com sucesso!")
+
+    }catch(err){
+      console.log("ERROR " + err)
+      toast.error("Erro ao cadastrar categoria!")
+      return
     }
   }
 
