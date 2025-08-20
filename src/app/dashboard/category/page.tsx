@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import styles from "./styles.module.scss";
 import { Button } from "@/app/dashboard/components/button";
 import { toast } from "sonner";
@@ -13,21 +15,20 @@ export default function Category() {
     if (name === "") return;
 
     const data = { name: name };
-    const token = await getCookieServer()
+    const token = await getCookieServer();
 
-    try{
-      await api.post('/category', data,{
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      } )
-      console.log("Categoria cadastrada com sucesso!")
-      toast.success("Categoria cadastrada com sucesso!")
-
-    }catch(err){
-      console.log("ERROR " + err)
-      toast.error("Erro ao cadastrar categoria!")
-      return
+    try {
+      await api.post("/category", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Categoria cadastrada com sucesso!");
+      toast.success("Categoria cadastrada com sucesso!");
+    } catch (err) {
+      console.log("ERROR " + err);
+      toast.error("Erro ao cadastrar categoria!");
+      return;
     }
   }
 
