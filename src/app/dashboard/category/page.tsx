@@ -1,3 +1,5 @@
+
+
 import styles from "./styles.module.scss";
 import { Button } from "@/app/dashboard/components/button";
 import { toast } from "sonner";
@@ -7,7 +9,7 @@ import { getCookieServer } from "@/lib/cookieServer";
 
 export default function Category() {
   async function handleRegisterCategory(formData: FormData) {
-    "use server";
+    
     const name = formData.get("name");
 
     if (name === "") return;
